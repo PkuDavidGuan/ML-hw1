@@ -1,0 +1,9 @@
+__pycache__/
+.idea/
+data.tar
+data/__pycache__/
+data/abalone/
+data/chess/
+data/cnae/
+data/dota2/
+data/seismic/
