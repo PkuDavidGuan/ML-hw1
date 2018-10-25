@@ -27,4 +27,4 @@ def Abalone(data_path):
       else:
         x_test.append(x)
         y_test.append(y)
-  return x_train, y_train, x_test, y_test
+  return x_train, x_test, y_train, y_test

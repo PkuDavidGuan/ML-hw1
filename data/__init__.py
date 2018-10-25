@@ -1,8 +1,11 @@
 from .Abalone import Abalone
-
+from .Chess import Chess
+from .Cnae import Cnae
 
 __factory = {
-  'abalone':Abalone
+  'abalone':Abalone,
+  'chess':Chess,
+  'cnae':Cnae,
 }
 
 

@@ -2,6 +2,7 @@ __pycache__/
 .idea/
 data.tar
 data/__pycache__/
+model/__pycache__/
 data/abalone/
 data/chess/
 data/cnae/
