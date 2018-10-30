@@ -1,3 +1,6 @@
+from sklearn.model_selection import train_test_split
+
+
 def parse(line):
   gender_dict = {'I':0, 'F':1, 'M':2}
   features = line.split(',')
@@ -11,7 +14,7 @@ def parse(line):
   return x, y
 
 
-def Abalone(data_path):
+def Abalone(data_path, with_val=True):
   x_train, y_train, x_test, y_test = [], [], [], []
   with open(data_path, 'r') as infile:
     count = 0
@@ -27,4 +30,8 @@ def Abalone(data_path):
       else:
         x_test.append(x)
         y_test.append(y)
-  return x_train, x_test, y_train, y_test
+  if not with_val:
+    return x_train, x_test, y_train, y_test
+  else:
+    x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, train_size=len(x_train)-len(x_test))
+    return x_train, x_val, x_test, y_train, y_val, y_test

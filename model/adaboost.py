@@ -9,7 +9,7 @@ from ..data import create
 def main(args):
   count = 0
   for i in tqdm(range(10)):
-    x_train, x_test, y_train, y_test = create(args.dataset, args.data_path)
+    x_train, x_test, y_train, y_test = create(args.dataset, args.data_path, with_val=False)
     clf = AdaBoostClassifier( n_estimators=100, learning_rate=0.1)
     clf.fit(x_train, y_train)
     count += clf.score(x_test, y_test)

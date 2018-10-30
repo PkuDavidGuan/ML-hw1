@@ -6,7 +6,7 @@ def parse(line):
   return features[1:], features[0]
 
 
-def Cnae(data_path):
+def Cnae(data_path, with_val=True):
   x_array, y_array = [], []
   with open(data_path, 'r') as infile:
     while True:
@@ -16,4 +16,9 @@ def Cnae(data_path):
       x, y = parse(line)
       x_array.append(x)
       y_array.append(y)
-  return train_test_split(x_array, y_array, train_size=900)
+  if not with_val:
+    return train_test_split(x_array, y_array, train_size=900)
+  else:
+    x_train, x_test, y_train, y_test = train_test_split(x_array, y_array, train_size=900)
+    x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, train_size=720)
+    return x_train, x_val, x_test, y_train, y_val, y_test

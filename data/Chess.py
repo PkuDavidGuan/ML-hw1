@@ -16,7 +16,7 @@ def parse(line):
   return x, y
 
 
-def Chess(data_path):
+def Chess(data_path, with_val=True):
   x_array, y_array = [], []
   with open(data_path, 'r') as infile:
     while True:
@@ -26,7 +26,12 @@ def Chess(data_path):
       x, y = parse(line)
       x_array.append(x)
       y_array.append(y)
-  return train_test_split(x_array, y_array, test_size = 0.2)
+  if not with_val:
+    return train_test_split(x_array, y_array, test_size = 0.2)
+  else:
+    x_train, x_test, y_train, y_test = train_test_split(x_array, y_array, train_size=0.6)
+    x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, train_size=0.2)
+    return x_train, x_val, x_test, y_train, y_val, y_test
 
 
 if __name__ == '__main__':
