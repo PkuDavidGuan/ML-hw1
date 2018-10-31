@@ -1,6 +1,7 @@
 import argparse
 from tqdm import tqdm
 from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 import heapq
 from ..data import create
@@ -12,7 +13,7 @@ def main(args):
   bestAcc = 0.0
   bestPara = 0
   for para in paras:
-      clf = AdaBoostClassifier( n_estimators=para, learning_rate=0.1)
+      clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(), n_estimators=para, learning_rate=0.1)
       clf.fit(x_train, y_train)
       tmpAcc = clf.score(x_valid, y_valid)
       print("n_estimators = {}, Acc = {}".format(para, tmpAcc))
@@ -20,7 +21,7 @@ def main(args):
           bestAcc = tmpAcc
           bestPara = para
   print("choose {} as n_neighbors".format(bestPara))
-  clf = AdaBoostClassifier( n_estimators=bestPara, learning_rate=0.1)
+  clf = AdaBoostClassifier(base_estimator=DecisionTreeClassifier(), n_estimators=bestPara, learning_rate=0.1)
   clf.fit(x_train, y_train)
   feaImportance = clf.feature_importances_
   feaIds = heapq.nlargest(2,range(4),feaImportance.take)

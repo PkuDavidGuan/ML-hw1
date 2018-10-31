@@ -7,8 +7,16 @@ def parse(line):
 
   x = [gender_dict[features[0]]]
   y = int(features[-1])
+  if y <= 8:
+    y = 0
+  elif y <= 10:
+    y = 1
+  else:
+    y = 2
 
-  for i in range(1, len(features) - 1):
+  # len_ = len(features) - 1
+  len_ = len(features) - 1
+  for i in range(1, len_):
     x.append(float(features[i]))
 
   return x, y

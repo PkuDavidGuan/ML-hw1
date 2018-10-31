@@ -11,7 +11,7 @@ def main(args):
     bestAcc = 0.0
     bestPara = 0
     for para in paras:
-        clf = KNeighborsClassifier(n_neighbors=para)
+        clf = KNeighborsClassifier(n_neighbors=para, p=1)
         clf.fit(x_train, y_train)
         tmpAcc = clf.score(x_valid, y_valid)
         print("neigh = {}, Acc = {}".format(para, tmpAcc))
@@ -19,7 +19,7 @@ def main(args):
             bestAcc = tmpAcc
             bestPara = para
     print("choose {} as n_neighbors".format(bestPara))
-    clf = KNeighborsClassifier(n_neighbors=bestPara)
+    clf = KNeighborsClassifier(n_neighbors=bestPara, p=1)
     clf.fit(x_train, y_train)
     finalAcc = clf.score(x_test, y_test)
     print("Accuracy on test set: {}".format(finalAcc))
